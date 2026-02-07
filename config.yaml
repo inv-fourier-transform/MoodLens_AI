@@ -1,0 +1,38 @@
+# Project Configuration
+project:
+  name: "MoodLens AI"
+  version: "1.1.0"
+
+# Model Configuration
+model:
+  architecture: "ResNet50"  # Options: ResNet50, EfficientNet-B0, ConvNeXt-Tiny
+  num_classes: 6
+  num_epochs: 30
+  batch_size: 32
+
+# Training Configuration
+training:
+  optimizer: "Adam"
+  learning_rate: 0.001
+  loss_function: "KLDivLoss"
+  save_checkpoints: true
+
+# Data Configuration
+data:
+  emotions: ['anger', 'disgust', 'fear', 'joy', 'sadness', 'surprise']
+  train_split: 0.80
+  val_split: 0.20
+  random_seed: 42
+
+# Inference Configuration
+inference:
+  confidence_threshold: 0.5
+  top_k: 2
+
+# API Configuration
+api:
+  fastapi:
+    host: "127.0.0.1"
+    port: 8000
+  streamlit:
+    port: 8501

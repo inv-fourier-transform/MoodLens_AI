@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Training data (keep only ground_truth.txt)
+training/dataset/images/
+training/**/*.jpg
+training/**/*.jpeg
+training/**/*.png
+training/**/*.gif
+training/dataset/readme.txt
+!training/dataset/ground_truth.txt
+
+# Model checkpoints (optional - include if you want to exclude large files)
+# checkpoints/*.pth
+
+# OS files
+.DS_Store
+Thumbs.db
