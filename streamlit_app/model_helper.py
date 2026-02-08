@@ -9,13 +9,26 @@ import streamlit as st
 # Load environment variables from .env file
 # load_dotenv(dotenv_path='../.env')
 
-# Cloud: use st.secrets | Local: use .env
+import os
+import streamlit as st
+
+# Get directory where this file (model_helper.py) is located
+helper_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Load path from secrets or env
 try:
-    model_path = st.secrets["MODEL_PATH"]["value"]
+    model_path_relative = st.secrets["MODEL_PATH"]["value"]
 except:
     from dotenv import load_dotenv
-    load_dotenv(dotenv_path='../.env')
-    model_path = os.getenv("MODEL_PATH")
+    load_dotenv(dotenv_path=os.path.join(helper_dir, '..', '.env'))
+    model_path_relative = os.getenv("MODEL_PATH")
+
+# Construct absolute path (works regardless of working directory)
+if os.path.isabs(model_path_relative):
+    model_path = model_path_relative
+else:
+    model_path = os.path.join(helper_dir, model_path_relative)
+
 
 trained_model = None
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
