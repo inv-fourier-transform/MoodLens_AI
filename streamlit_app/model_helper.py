@@ -4,9 +4,18 @@ import torch.nn.functional as F
 from torchvision import transforms, models
 import os
 from dotenv import load_dotenv
+import streamlit as st
 
 # Load environment variables from .env file
-load_dotenv(dotenv_path='../.env')
+# load_dotenv(dotenv_path='../.env')
+
+# Cloud: use st.secrets | Local: use .env
+try:
+    model_path = st.secrets["MODEL_PATH"]["value"]
+except:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path='../.env')
+    model_path = os.getenv("MODEL_PATH")
 
 trained_model = None
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -26,7 +35,7 @@ def get_model():
 
         # Load checkpoint
         # Get path from environment variable
-        model_path = os.getenv("MODEL_PATH") # Refer to .env.example for the path
+        #model_path = os.getenv("MODEL_PATH") # Refer to .env.example for the path
         model.load_state_dict(torch.load(model_path, map_location=device))
 
         model.to(device)

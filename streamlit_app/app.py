@@ -11,6 +11,7 @@ import os
 import streamlit as st
 
 # Streamlit Cloud: use secrets | Local: use .env file
+# Cloud: use st.secrets | Local: use .env
 try:
     model_path = st.secrets["MODEL_PATH"]["value"]
 except:
