@@ -4,9 +4,19 @@ from model_helper import detect_emotion
 import os
 from dotenv import load_dotenv
 
-load_dotenv(dotenv_path='../.env')  # Go up one level to find .env
-model_path = os.getenv("MODEL_PATH")
+# load_dotenv(dotenv_path='../.env')  # Go up one level to find .env
+# model_path = os.getenv("MODEL_PATH")
 
+import os
+import streamlit as st
+
+# Streamlit Cloud: use secrets | Local: use .env file
+try:
+    model_path = st.secrets["MODEL_PATH"]["value"]
+except:
+    from dotenv import load_dotenv
+    load_dotenv(dotenv_path='../.env')
+    model_path = os.getenv("MODEL_PATH")
 
 # Page config
 st.set_page_config(
